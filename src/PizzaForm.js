@@ -19,7 +19,7 @@ padding-right: 3em;
 export default function PizzaForm({addToOrder}) {
     const [formData, setFormData] = useState({
         name: "",
-        size: "",
+        pizzaSize: "",
         sauce: "",
         toppings: [],
         special: "",
@@ -27,7 +27,7 @@ export default function PizzaForm({addToOrder}) {
 
     const [errors, setErrors] = useState({
         name: "",
-        size: "",
+        pizzaSize: "",
         sauce: "",
         toppings: [],
         special: "",
@@ -55,7 +55,7 @@ export default function PizzaForm({addToOrder}) {
             <h1>Build Your Own Pizza</h1>
 
             <div id = 'nameOnOrder'>
-                <label for='nameInput'>Name:</label>
+                <label for='name-input'>Name:</label>
                 <input type='text' id='name-input' name="name"/> 
             </div>
 
@@ -120,7 +120,7 @@ export default function PizzaForm({addToOrder}) {
             </div>
             <div id='special'>
                 <h2>Special Instructions</h2>
-                <input type='text' id='special-text' placeholder="Anything else ?"/>
+                <input type='text' id='special-text' name='special' placeholder="Anything else ?"/>
             </div>
             
 
