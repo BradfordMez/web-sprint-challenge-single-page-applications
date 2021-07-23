@@ -13,7 +13,7 @@ export default function HomePage() {
                 <img></img>
                 <h1>Your favorite food, delivered while coding</h1>
 
-                <Link to='/pizza'>
+                <Link to='/pizza' id='order-pizza'>
                     <button>Pizza?</button>
                 </Link>
 

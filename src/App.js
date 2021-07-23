@@ -1,10 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link, Route, Switch} from 'react-router-dom'
 import PizzaForm from "./PizzaForm";
 import HomePage from "./HomePage";
+import Orders from "./Orders";
 
 
 const App = () => {
+  const [orders, setOrders] = useState([])
+  const addToOrder=(newOrder)=>{
+    setOrders([...orders, newOrder])
+  }
 
   return (
     <>
@@ -15,7 +20,7 @@ const App = () => {
       </Link>
       <button>Help</button>
       </header>
-      
+
       <Switch>
 
         <Route exact path='/'>
@@ -23,7 +28,10 @@ const App = () => {
         </Route>
 
         <Route path='/pizza'>
-          <PizzaForm/>
+          <PizzaForm addToOrder={addToOrder}/>
+            {orders.map((order)=>{
+              return <Orders Orders={order}/>
+            })}
         </Route>
 
       </Switch>

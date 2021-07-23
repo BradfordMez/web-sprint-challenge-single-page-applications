@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
+
 
 const FormAF = styled.form`
     text-align: center;
@@ -14,18 +16,53 @@ padding-right: 3em;
 
 `
 
+export default function PizzaForm({addToOrder}) {
+    const [formData, setFormData] = useState({
+        name: "",
+        size: "",
+        sauce: "",
+        toppings: [],
+        special: "",
+    })
 
-export default function PizzaForm() {
+    const [errors, setErrors] = useState({
+        name: "",
+        size: "",
+        sauce: "",
+        toppings: [],
+        special: "",
+    })
+
+    const onSubmit=evt=>{
+        evt.preventDefault()
+        axios.post('https://reqres.in/api/orders', formData)
+            .then(res=>{
+                addToOrder(res.data)
+                setFormData({
+                    name: "",
+                    size: "",
+                    sauce: "",
+                    toppings: [],
+                    special: "",
+                })
+            }).catch(err=>console.log(err))
+    }
+
     return (
-        <FormAF>
+        <FormAF id='pizza-form' onSubmit={onSubmit}>
             <h2>Build Your Own Pizza!</h2>
             <img></img>
             <h1>Build Your Own Pizza</h1>
 
+            <div id = 'nameOnOrder'>
+                <label for='nameInput'>Name:</label>
+                <input type='text' id='name-input' name="name"/> 
+            </div>
+
             <div id='sizeChoice'>
                 <h2>Choice of Size</h2>
 
-                <select name="pizzaSize">
+                <select name="pizzaSize" id='size-dropdown'>
                     <option value=''>--Select a Size--</option>
                     <option value="small">Small</option>
                     <option value="medium">Medium</option>
@@ -50,45 +87,46 @@ export default function PizzaForm() {
             <div id='toppings'>
                 <h2>Add Toppings</h2>
 
-                <input type='checkbox' id='pepperoni' value='Pepperoni' />
+                <input type='checkbox' className='toppings' id='pepperoni' value='Pepperoni' />
                     <label for='pepperoni'>Pepperoni</label>
 
-                <input type='checkbox' id='sausage' value='Sausage' />
+                <input type='checkbox' className='toppings' id='sausage' value='Sausage' />
                     <label for='sausage'>Sausage</label>
 
-                <input type='checkbox' id='chicken' value='Chicken' />
+                <input type='checkbox' className='toppings' id='chicken' value='Chicken' />
                     <label for='chicken'>Chicken</label>
 
-                <input type='checkbox' id='canadian' value='Canadian Bacon' />
+                <input type='checkbox' className='toppings' id='canadian' value='Canadian Bacon' />
                     <label for='canadian'>Canadian Bacon</label>
 
-                <input type='checkbox' id='onions' value='Onions' />
+                <input type='checkbox' className='toppings' id='onions' value='Onions' />
                     <label for='onions'>Onions</label>
 
-                <input type='checkbox' id='tomatoes' value='Tomatoes' />
+                <input type='checkbox' className='toppings' id='tomatoes' value='Tomatoes' />
                     <label for='tomatoes'>Tomatoes</label>
 
-                <input type='checkbox' id='pineapple' value='Pineapple' />
+                <input type='checkbox' className='toppings' id='pineapple' value='Pineapple' />
                     <label for='pineapple'>Pineapple</label>
 
-                <input type='checkbox' id='greenPep' value='Green Peppers' />
+                <input type='checkbox' className='toppings' id='greenPep' value='Green Peppers' />
                     <label for='greenPep'>Green Peppers</label>
 
-                <input type='checkbox' id='blackOlives' value='Black Olives' />
+                <input type='checkbox' className='toppings' id='blackOlives' value='Black Olives' />
                     <label for='blackOlives'>Black Olives</label>
 
-                <input type='checkbox' id='extraCheese' value='Extra Cheese' />
+                <input type='checkbox' className='toppings' id='extraCheese' value='Extra Cheese' />
                     <label for='extraCheese'>Extra Cheese</label>
 
             </div>
             <div id='special'>
                 <h2>Special Instructions</h2>
-                <input type='text' id='instruction' placeholder="Anything else ?"/>
+                <input type='text' id='special-text' placeholder="Anything else ?"/>
             </div>
+            
 
             <Footer>
-                <input type="number" id="quantity" placeholder="1"/>
-                <button>Add to Order</button>
+                <input type="number" id="order-button" placeholder="quantity"/>
+                <button type='submit' name='button'>Add to Order</button>
             </Footer>
             
 
