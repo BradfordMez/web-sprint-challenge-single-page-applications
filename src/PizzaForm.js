@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 
 
-const FormAF = styled.form`
+const Form = styled.form`
     text-align: center;
     border:.8em ridge ${props=>props.theme.tertiaryColor};
     margin-left:5rem;
@@ -49,7 +49,7 @@ export default function PizzaForm({addToOrder}) {
     }
 
     return (
-        <FormAF id='pizza-form' onSubmit={onSubmit}>
+        <Form id='pizza-form' onSubmit={onSubmit}>
             <h2>Build Your Own Pizza!</h2>
             <img></img>
             <h1>Build Your Own Pizza</h1>
@@ -130,6 +130,6 @@ export default function PizzaForm({addToOrder}) {
             </Footer>
             
 
-        </FormAF>
+        </Form>
     )
 }
